@@ -10,6 +10,25 @@
       "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "no-console": 0
+        "no-console": 0,
+        "indent": ["error", "tab"],
+        "no-extra-semi": 2,
+        "no-trailing-spaces": 1,
+        "comma-dangle": ["error", "always-multiline"],
+        "comma-spacing": ["error", {"before": false, "after": true}],
+        "max-len": ["error", {"code": 150}],
+        "no-empty": 0,
+        "no-empty-function": 0,
+        "no-var": 2,
+        "no-use-before-define": 2,
+        "curly": 2,
+        "no-whitespace-before-property": 1,
+        "no-unneeded-ternary": 2,
+        "space-before-function-paren": ["error", "never"],
+        "space-before-blocks": "error",
+        "new-cap": ["error", {"newIsCap": true, "capIsNew": true}],
+        "no-unreachable": 2,
+        "no-unexpected-multiline": 2,
+        "semi": 1
     }
 }
