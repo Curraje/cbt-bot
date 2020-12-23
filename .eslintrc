@@ -11,7 +11,7 @@
     ],
     "rules": {
         "no-console": 0,
-        "indent": ["error", "tab"],
+        "indent": ["error", 4],
         "no-extra-semi": 2,
         "no-trailing-spaces": 1,
         "comma-dangle": ["error", "always-multiline"],
