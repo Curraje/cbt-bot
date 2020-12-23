@@ -4,6 +4,12 @@
   "description": "A discord bot that does stuff.",
   "main": "dist/main.js",
   "private": true,
+  "husky": {
+    "hooks": {
+        "pre-commit": "npm run lint",
+        "pre-push": "npm run lint"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "node_modules/.bin/tsc -w",
