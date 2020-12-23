@@ -2,7 +2,7 @@
   "name": "cbt",
   "version": "1.0.0",
   "description": "A discord bot that does stuff.",
-  "main": "dist/main.js",
+  "main": "dist/src/main.js",
   "private": true,
   "husky": {
     "hooks": {
@@ -14,7 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "node_modules/.bin/tsc -w",
     "build": "node_modules/.bin/tsc",
-    "start": "node dist/main.js",
+    "start": "node dist/src/main.js",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --fix --ext .ts",
     "postinstall": "husky install",
