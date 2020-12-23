@@ -9,7 +9,9 @@
         "strictNullChecks": true,
         "noImplicitThis": true,
         "inlineSourceMap": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true
     },
     "include": [
         "src"
