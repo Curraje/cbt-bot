@@ -7,7 +7,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm run lint"
+      "pre-push": "npm run lint:fix"
     }
   },
   "scripts": {
@@ -16,6 +16,7 @@
     "build": "node_modules/.bin/tsc",
     "start": "node dist/main.js",
     "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --fix --ext .ts",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
