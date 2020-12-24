@@ -1,5 +1,5 @@
 {
-  "name": "cbt",
+  "name": "cbt-bot",
   "version": "1.0.0",
   "description": "A discord bot that does stuff.",
   "main": "dist/src/main.js",
@@ -23,14 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Curraje/cbt.git"
+    "url": "https://github.com/Curraje/cbt-bot.git"
   },
   "author": "Raje",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Curraje/cbt/issues"
+    "url": "https://github.com/Curraje/cbt-bot/issues"
   },
-  "homepage": "https://github.com/Curraje/cbt#readme",
+  "homepage": "https://github.com/Curraje/cbt-bot#readme",
   "dependencies": {
     "discord.js": "^12.5.1"
   },
