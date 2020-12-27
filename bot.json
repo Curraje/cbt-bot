@@ -1,6 +1,8 @@
 {
     "prefix": "c.",
     "commands": [
-
+        "user",
+        "server",
+        "help"
     ]
 }
