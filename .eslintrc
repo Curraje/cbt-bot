@@ -26,7 +26,6 @@
         "no-unneeded-ternary": 2,
         "space-before-function-paren": ["error", "never"],
         "space-before-blocks": "error",
-        "new-cap": ["error", {"newIsCap": true, "capIsNew": true}],
         "no-unreachable": 2,
         "no-unexpected-multiline": 2,
         "semi": 1
