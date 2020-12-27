@@ -1,6 +1,8 @@
 # CBT Discord Bot
 A discord bot written in TypeScript.
 
+The api and structure of this project was based on and inspired by [this discord bot](https://github.com/Leopotam/discord-bot) made by user [Leopotam](https://github.com/Leopotam).
+
 ## Installation
 
 This bot requires node.js (duh) to install. 
