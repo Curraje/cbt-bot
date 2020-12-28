@@ -1,15 +1,27 @@
-import {IBotCommand, Discord} from "../api";
+import {IBotCommand, Discord, IBot} from "../api";
 
 export default class UserCommand implements IBotCommand
 {
+    public get usage(): string { return this._usage; }
+
     public readonly name = "user";
-    public readonly description = "Displays User Information";
+
+    public readonly descriptions = [
+        "Displays User Information",
+    ];
+
+    public readonly requires_args = false;
+
+    public readonly guildOnly = true;
+
+    private _usage = "";
 
     public aliases: string[] = [];
 
-    public help():string
+    public init(bot: IBot): boolean
     {
-        return "";
+        this._usage = `${bot.config.prefix + this.name}`;
+        return true;
     }
 
     public async execute(message: Discord.Message): Promise<void>

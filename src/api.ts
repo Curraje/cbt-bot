@@ -1,6 +1,9 @@
+/* eslint-disable no-use-before-define */
 import * as Discord from 'discord.js';
 
 export {Discord};
+
+export const seconds = 1000;
 
 export interface IBotConfig
 {
@@ -12,17 +15,24 @@ export interface IBotConfig
 export interface IBotCommand
 {
     readonly name: string,
-    readonly description: string,
+    readonly descriptions: string[],
+    readonly usage: string,
+    readonly requires_args: boolean,
+    readonly args?: Record<string, string>,
+    readonly guildOnly: boolean,
+    readonly permissions?: string,
+    cooldown?: number,
     aliases: string[],
     execute(message: Discord.Message, args?: string[]): Promise<void>,
-    help(): string
+    init(bot: IBot): boolean
 }
 
 export interface IBot
 {
     readonly commands: IBotCommand[],
     readonly client: Discord.Client,
-    readonly config: IBotConfig
+    readonly config: IBotConfig,
+    loadCommands(commandPath: string): void
 }
 
 export interface IBotEmbed

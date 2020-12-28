@@ -2,13 +2,13 @@ import {IBot, IBotCommand, Discord, IBotConfig} from "./api";
 
 export default class Bot implements IBot
 {
-    public get commands(): IBotCommand[] { return this._commands;}
+    public get commands(): IBotCommand[] { return this._commands; }
 
-    public get client(): Discord.Client { return this._client;}
+    public get client(): Discord.Client { return this._client; }
 
-    public get config(): IBotConfig { return this._config;}
+    public get config(): IBotConfig { return this._config; }
 
-    private readonly _commands: IBotCommand[] = [];
+    private _commands: IBotCommand[] = [];
 
     private _client: Discord.Client = new Discord.Client;
 
@@ -36,15 +36,20 @@ export default class Bot implements IBot
             if (!message.content.startsWith(this._config.prefix) || message.author.bot) { return; }
 
             const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-            const command = args.shift()?.toLowerCase();
+            const commandName = args.shift()?.toLowerCase();
+
+            if (commandName === undefined)
+            {
+                return;
+            }
 
             for (const cmd of this._commands)
             {
-                if (cmd.name === command)
+                if (cmd.name === commandName || cmd.aliases.includes(commandName))
                 {
                     try
                     {
-                        cmd.execute(message);
+                        cmd.execute(message, args);
                     }
                     catch(error)
                     {
@@ -65,20 +70,34 @@ export default class Bot implements IBot
      *
      * @param commandPath The path to the folder holding the command classes.
      */
-    private loadCommands(commandPath: string)
+    public loadCommands(commandPath: string): void
     {
         if (!this._config.commands || this._config.commands.length === 0)
         {
             throw new Error("Command list not found.");
         }
 
+        if (this._commands.length > 0)
+        {
+            console.info("A command list was already loaded! Cleared...");
+            this._commands.length = 0;
+        }
+
         for (const commandName of this._config.commands)
         {
             import(`${commandPath}/${commandName}`).then(cmdClass => {
                 const cmd = new cmdClass.default() as IBotCommand;
-                this._commands.push(cmd);
-                console.info(`Command: ${commandName} loaded...`);
-            });
+
+                if (cmd.init(this as IBot))
+                {
+                    this._commands.push(cmd);
+                    console.info(`Command: ${commandName} loaded...`);
+                }
+                else
+                {
+                    console.error(`Command: ${commandName} failed to initialize! skipped...`);
+                }
+            }).catch(err => { console.log(`An error occurred while trying to load commands!`); throw err;});
         }
     }
 
