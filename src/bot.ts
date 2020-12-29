@@ -12,7 +12,7 @@ export default class Bot implements IBot
 
     private _client: Discord.Client = new Discord.Client;
 
-    private _config: IBotConfig = {token: '', commands: [], prefix: ''};
+    private _config!: IBotConfig;
 
     /**
      * Loads the bot's commands, starts the bot and listens for instructions.
@@ -21,6 +21,10 @@ export default class Bot implements IBot
      */
     public launch(config: IBotConfig, commandPath: string): void
     {
+        if (config.token === undefined)
+        {
+            throw new Error("Critical error 😱! Token was not found! Check that bot.prod.json exists!");
+        }
         this._config = config;
 
         this.loadCommands(commandPath);
@@ -33,7 +37,7 @@ export default class Bot implements IBot
 
         // Message Listener
         this._client.on('message', async(message) => {
-            if (!message.content.startsWith(this._config.prefix) || message.author.bot) { return; }
+            if (!message.content.toLowerCase().startsWith(this._config.prefix) || message.author.bot) { return; }
 
             const args = message.content.slice(config.prefix.length).trim().split(/ +/);
             const commandName = args.shift()?.toLowerCase();
@@ -49,7 +53,7 @@ export default class Bot implements IBot
                 {
                     try
                     {
-                        cmd.execute(message, args);
+                        cmd.execute(message, args).then(() => console.info(`${cmd.name} executed successfully...`));
                     }
                     catch(error)
                     {

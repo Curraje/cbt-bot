@@ -4,6 +4,7 @@
         "user",
         "server",
         "help",
-        "reload"
+        "reload",
+        "pokemon"
     ]
 }
