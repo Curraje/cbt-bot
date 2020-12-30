@@ -53,7 +53,10 @@ export default class Bot implements IBot
                 {
                     try
                     {
-                        cmd.execute(message, args).then(() => console.info(`${cmd.name} executed successfully...`));
+                        console.time(`${cmd.name} executed in`);
+                        cmd.execute(message, args).then(() => {
+                            console.timeEnd(`${cmd.name} executed in`);
+                        });
                     }
                     catch(error)
                     {

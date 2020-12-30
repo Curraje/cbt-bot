@@ -1,6 +1,10 @@
 /* eslint-disable no-use-before-define */
 import * as Discord from 'discord.js';
 
+import Pokedex from 'pokedex-promise-v2';
+
+export const pokedex = new Pokedex();
+
 export {Discord};
 
 export const seconds = 1000;

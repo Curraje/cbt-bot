@@ -5,6 +5,7 @@
         "server",
         "help",
         "reload",
-        "pokemon"
+        "pokemon",
+        "anagram"
     ]
 }
