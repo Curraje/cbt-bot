@@ -1,3 +1,4 @@
+// use lodash random instead
 export function getRandomInt(min?: number, max?: number): number
 {
     if (max === undefined)
@@ -17,12 +18,13 @@ export function getRandomInt(min?: number, max?: number): number
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// use lodash capitalize instead
 export function capitalize(s: string): string
 {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-function sortString(s: string): string
+export function sortString(s: string): string
 {
     return s.split('').sort().join('');
 }
@@ -53,11 +55,11 @@ export function permutation(n: number, k: number): number
     return p/v;
 }
 
-function swap(chars: string[], i: number, j: number): void
+export function swap<T>(pos: T[], i: number, j: number): void
 {
-    const tmp = chars[i];
-    chars[i] = chars[j];
-    chars[j] = tmp;
+    const tmp = pos[i];
+    pos[i] = pos[j];
+    pos[j] = tmp;
 }
 
 export function isIsogram(str: string): boolean
@@ -72,7 +74,7 @@ export function repeatCharCount(str: string): number
     return count || 0;
 }
 
-export function findAnagrams(input: string) : string[]
+export function findAnagrams(input: string, count?: number) : string[]
 {
     const counter = [],
         anagrams: string[] = [],
@@ -87,7 +89,6 @@ export function findAnagrams(input: string) : string[]
 
     i = 0;
     while (i < length)
-    // while (i < permutation(length, length))
     {
         if (counter[i] < i)
         {
@@ -106,5 +107,5 @@ export function findAnagrams(input: string) : string[]
         }
     }
 
-    return anagrams;
+    return count ? anagrams.slice(count, count) : anagrams;
 }

@@ -1,27 +1,42 @@
-import {IBotCommand, Discord, IBot} from "../api";
+import {IBotCommand, Discord, IBotCommandInfo, CategoryTypes} from "../api";
 
 export default class ServerCommand implements IBotCommand
 {
-    public get usage(): string { return this._usage; }
+    public get info(): IBotCommandInfo { return this._info; }
 
     public readonly name = "server";
 
     public readonly descriptions = [
         "Displays Server Information",
+        "Can only be used in a server channel",
     ];
 
-    public readonly requires_args = false;
-
-    public readonly guildOnly = true;
-
-    private _usage = "";
+    public readonly arguments = null;
 
     public aliases: string[] = [];
 
-    public init(bot: IBot): boolean
+    private _info!: IBotCommandInfo;
+
+    public init(): boolean
     {
-        this._usage = `${bot.config.prefix + this.name}`;
+
+        this._info = {
+            name: this.name,
+            aliases: this.aliases,
+            descriptions: this.descriptions,
+            category: CategoryTypes.Util,
+            cooldown: 0,
+            args: this.arguments,
+            permissions: null,
+            examples: [""],
+        };
+
         return true;
+    }
+
+    public isValid(message: Discord.Message): boolean
+    {
+        return !(message.channel.type === 'dm');
     }
 
     public async execute(message: Discord.Message): Promise<void>

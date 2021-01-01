@@ -1,8 +1,8 @@
-import {IBotCommand, Discord, IBot} from "../api";
+import {IBotCommand, Discord, CategoryTypes, IBotCommandInfo} from "../api";
 
 export default class UserCommand implements IBotCommand
 {
-    public get usage(): string { return this._usage; }
+    public get info(): IBotCommandInfo { return this._info; }
 
     public readonly name = "user";
 
@@ -10,17 +10,29 @@ export default class UserCommand implements IBotCommand
         "Displays User Information",
     ];
 
-    public readonly requires_args = false;
-
-    public readonly guildOnly = true;
-
-    private _usage = "";
-
     public aliases: string[] = [];
 
-    public init(bot: IBot): boolean
+    public readonly arguments = null;
+
+    private _info!: IBotCommandInfo;
+
+    public init(): boolean
     {
-        this._usage = `${bot.config.prefix + this.name}`;
+        this._info = {
+            name: this.name,
+            aliases: this.aliases,
+            descriptions: this.descriptions,
+            category: CategoryTypes.Util,
+            cooldown: 3,
+            args: this.arguments,
+            permissions: null,
+            examples: [""],
+        };
+        return true;
+    }
+
+    public isValid(): boolean
+    {
         return true;
     }
 

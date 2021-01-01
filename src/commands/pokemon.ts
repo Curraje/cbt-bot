@@ -1,57 +1,97 @@
 // TODO
-// Shiny Pokemon
-// Pokemon Forms: Galar, Alolan, Special
-// Evolution Chain
-// Other pokemon information
-import {IBotCommand, IBot, Discord, pokedex} from '../api';
+// Get it down to only one request | Verdict: Str8 up impossible if I want to display what I am displaying.
+// Fix invalid requests, they take just as long as valid ones
+// cache the names/id, whichever one was not requested originally, so it does not produce an extra request to the api.
+// Pokemon with spaces in their name, query whole args list
+// Shiny Pokemon: Thumbnail and Image
+// Pokemon Forms: Galar, Alolan, Special (e.g. Wormadam Forms, Rotom Forms, Giratina)
+// Evolution Chain / Method
+// Smogon Tier for latest gen?
+// Region introduced
+// Move Count
+// Using region, get their thumbnail
+// Height and Weight in Imperial
+// Fix Formatting for Fields
+// Some pokemon with default formes like giratina and wormadam do not have a pokemon endpoint
+// Add More Information to Embed
+// More examples for edge cases
 
-// import Pokedex from 'pokedex-promise-v2';
+// REQUEST POKEMON LIST AND CACHE IT SO INVALID REQUESTS ARE QUERIED LOCALLY INSTEAD OF SENDING A REQUEST TO THE SERVER
+import {IBotCommand, Discord, pokedex, IBotCommandInfo, CategoryTypes, Argument} from '../api';
 
 import {getRandomInt, capitalize} from '../helper';
 
 export default class PokemonCommand implements IBotCommand
 {
-    public get usage(): string { return this._usage; }
+    public get info(): IBotCommandInfo { return this._info; }
 
     public readonly name = "pokemon";
 
     public readonly descriptions = [
-        "Displays Pokemon Information",
+        "Shows information on a random pokemon unless you specify a name or number.",
+        "Can search from 1 to 898 (Pokedex Number).",
+        "For names with spaces, I haven't figured it out yet, but I will soon!",
     ];
 
-    public readonly requires_args = true;
+    public readonly arguments: Argument[] =
+    [
+        {
+            required: false,
+            name: "name or number",
+            allowedValues: null,
+        },
+    ];
 
-    public readonly guildOnly = true;
+    public readonly aliases: string[] = ["poke", "mon", "pokedex", "dex"];
 
-    private _usage = "";
+    private _info!: IBotCommandInfo;
 
-    public aliases: string[] = ["poke", "mon", "pokedex", "dex"];
-
-    // private pokedex = new Pokedex();
-
-    public init(bot: IBot): boolean
+    public init(): boolean
     {
-        this._usage = `${bot.config.prefix + this.name}`;
+        this._info = {
+            name: this.name,
+            aliases: this.aliases,
+            descriptions: this.descriptions,
+            category: CategoryTypes.Pokemon,
+            cooldown: 3,
+            args: this.arguments,
+            permissions: null,
+            examples: ["25", "pikachu", ""],
+        };
+        return true;
+    }
+
+    public isValid(): boolean
+    {
         return true;
     }
 
     public async execute(message: Discord.Message, args: string[]): Promise<void>
     {
-        const request = args.length === 0 ? getRandomInt(1, 898) : args[0];
+        const request = args.length === 0 ? getRandomInt(1, 898) : args.join().toLowerCase();
 
         let textEntry = `Cannot find pokemon with name or number **${request}**. Does that pokemon actually exist?`;
 
         try
         {
+            let mon, species, artworkID;
+            if (request.toString().includes('-'))
+            {
+                mon = await pokedex.getPokemonByName(request);
+                species = await pokedex.resource(mon.species.url);
+                artworkID = mon.id;
+            }
+            else
+            {
+                species = await pokedex.getPokemonSpeciesByName(request);
+                mon = await pokedex.getPokemonByName(species.id);
+                artworkID = species.id;
+            }
 
-            const pokemon = pokedex.getPokemonByName(request);
+            // const response = await Promise.all([pokemon, pokemonSpecies]);
 
-            const pokemonSpecies = pokedex.getPokemonSpeciesByName(request);
-
-            const response = await Promise.all([pokemon, pokemonSpecies]);
-
-            const mon = response[0];
-            const species = response[1];
+            // const mon = response[0];
+            // const species = response[1];
 
             textEntry = `Could not find an english text entry for ${species.name}`;
 
@@ -112,7 +152,7 @@ export default class PokemonCommand implements IBotCommand
                 {
                     name: "Appearance",
                     value:
-                    `Height: ${mon.height/10} m\nWeight: ${mon.weight/10} kg`,
+                    `Ht.: ${mon.height/10} m\nWt.: ${mon.weight/10} kg`,
                     inline: true,
                 },
                 {
@@ -124,11 +164,11 @@ export default class PokemonCommand implements IBotCommand
             const embed = new Discord.MessageEmbed()
                 .setColor(species.color.name.toUpperCase())
                 .setTitle(`#${species.id} - ${capitalize(species.name)}`)
-                .setURL(`https://bulbapedia.bulbagarden.net/wiki/${species.name}_(Pok%C3%A9mon)`)
+                .setURL(`https://pokemondb.net/pokedex/${species.name}`)
                 .setDescription(`${textEntry}`)
                 .setThumbnail(`http://img.pokemondb.net/sprites/black-white/anim/normal/${species.name}.gif`)
                 .addFields(embedFields)
-                .setImage(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${species.id}.png`)
+                .setImage(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${artworkID}.png`)
                 .setTimestamp()
                 ;
             message.channel.send(embed);
@@ -136,8 +176,9 @@ export default class PokemonCommand implements IBotCommand
         }
         catch(err)
         {
-            console.error(err);
+            // console.error(err);
             message.reply(textEntry);
+            throw err;
         }
     }
 }

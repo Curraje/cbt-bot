@@ -1,4 +1,7 @@
+// Implement Cooldowns
 import {IBot, IBotCommand, Discord, IBotConfig} from "./api";
+
+import * as path from 'path';
 
 export default class Bot implements IBot
 {
@@ -19,7 +22,7 @@ export default class Bot implements IBot
      * @param config The configuration information for the bot from bot.json and bot.prod.json.
      * @param commandPath The path to the command folder.
      */
-    public launch(config: IBotConfig, commandPath: string): void
+    public launch(config: IBotConfig, commandPath: string, dataPath: string): void
     {
         if (config.token === undefined)
         {
@@ -27,7 +30,7 @@ export default class Bot implements IBot
         }
         this._config = config;
 
-        this.loadCommands(commandPath);
+        this.loadCommands(commandPath, dataPath);
 
         // On Bot Startup
         this._client.once('ready', () => {
@@ -47,22 +50,31 @@ export default class Bot implements IBot
                 return;
             }
 
+            // Find the command the user entered
             for (const cmd of this._commands)
             {
                 if (cmd.name === commandName || cmd.aliases.includes(commandName))
                 {
-                    try
+
+                    // Check if the Message Environment and Arguments are valid
+                    if (cmd.isValid(message, args))
                     {
                         console.time(`${cmd.name} executed in`);
                         cmd.execute(message, args).then(() => {
                             console.timeEnd(`${cmd.name} executed in`);
+                        }).catch( err => {
+                            console.error(`Error occurred while executing ${cmd.name}!`);
+                            console.error(err);
+                            console.timeEnd(`${cmd.name} executed in`);
                         });
                     }
-                    catch(error)
+                    // If the command environment was not valid, send the help value for that command
+                    else
                     {
-                        console.error(error);
-                        message.reply("An error occurred while trying to execute that command.");
+                        this._commands.find(cmd => {return cmd.name === 'help';})?.execute(message, [cmd.name]);
                     }
+
+                    break;
                 }
             }
         });
@@ -77,25 +89,28 @@ export default class Bot implements IBot
      *
      * @param commandPath The path to the folder holding the command classes.
      */
-    public loadCommands(commandPath: string): void
+    public loadCommands(commandPath: string, dataPath: string): void
     {
+        // Check if the commands list is present
         if (!this._config.commands || this._config.commands.length === 0)
         {
             throw new Error("Command list not found.");
         }
 
+        // Check if a command list is already loaded
         if (this._commands.length > 0)
         {
             console.info("A command list was already loaded! Cleared...");
             this._commands.length = 0;
         }
 
+        // Import the commands, execute the class constructors and push them onto the bot command list
         for (const commandName of this._config.commands)
         {
             import(`${commandPath}/${commandName}`).then(cmdClass => {
                 const cmd = new cmdClass.default() as IBotCommand;
 
-                if (cmd.init(this as IBot))
+                if (cmd.init(this as IBot, path.resolve(`${dataPath}/${commandName}`)))
                 {
                     this._commands.push(cmd);
                     console.info(`Command: ${commandName} loaded...`);

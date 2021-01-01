@@ -1,18 +1,21 @@
-import {IBotCommand, IBot, Discord} from '../api';
+// Group Anagrams by the letter they start with
+// Comma-separated list instead of new lines to save space
+import {IBotCommand, Discord, IBotCommandInfo, CategoryTypes, Argument} from '../api';
 
 import {isAnagram, findAnagrams, permutation, repeatCharCount, factorial, capitalize} from '../helper';
 
 export default class AnagramCommand implements IBotCommand
 {
-    public get usage(): string { return this._usage; }
+    public get info(): IBotCommandInfo { return this._info; }
+
     public readonly name = "anagram";
+
     public readonly descriptions: string[] = [
-        "With one argument, returns the anagrams for that word, up to 120 anagrams.",
+        "With one argument, returns the anagrams for that word, up to 120 anagrams (5 unique characters).",
+        "If there are too many anagrams, will display amount instead.",
         "With two arguments, determines whether they are anagrams.",
     ];
-    private _usage = "";
-    public readonly requires_args = true;
-    public readonly guildOnly = false;
+
     aliases: string[] = [
         "ana",
         "similar",
@@ -21,14 +24,45 @@ export default class AnagramCommand implements IBotCommand
         "has",
     ];
 
+    public readonly arguments: Argument[] = [
+        {
+            name: "word to compare/find anagrams",
+            required: true,
+            allowedValues: null,
+        },
+        {
+            name: "word to compare",
+            required: false,
+            allowedValues: null,
+        },
+    ];
+
+    private _info!: IBotCommandInfo;
+
+    init(): boolean
+    {
+
+        this._info = {
+            name: this.name,
+            aliases: this.aliases,
+            descriptions: this.descriptions,
+            category: CategoryTypes.Other,
+            cooldown: 3,
+            args: this.arguments,
+            permissions: null,
+            examples: ["ana naa", "ana", "12345", "1010"],
+        };
+
+        return true;
+    }
+
+    public isValid(message: Discord.Message, args: string[]): boolean
+    {
+        return !!args.length;
+    }
+
     public async execute(message: Discord.Message, args: string[]): Promise<void>
     {
-        if (args.length === 0)
-        {
-            message.reply(`The ${this.name} command requires at least one arugment!`);
-            return;
-        }
-
         if (args[0] && !args[1])
         {
             const s1 = args[0];
@@ -99,12 +133,6 @@ export default class AnagramCommand implements IBotCommand
         }
 
         return;
-    }
-
-    init(bot: IBot): boolean
-    {
-        this._usage = `${bot.config.prefix + this.name}`;
-        return true;
     }
 
 }

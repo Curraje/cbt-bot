@@ -10,4 +10,4 @@ const bot = new Bot();
 
 const config = {...cfg, ...cfgProd} as api.IBotConfig;
 
-bot.launch(config, `${__dirname}/commands`);
+bot.launch(config, `${__dirname}/commands`, `${__dirname}/../data`);
