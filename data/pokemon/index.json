@@ -9,7 +9,8 @@
     },
     {
       "name": "venusaur",
-      "url": "https://pokeapi.co/api/v2/pokemon/3/"
+      "url": "https://pokeapi.co/api/v2/pokemon/3/",
+      "hasMega": true
     },
     {
       "name": "charmander",
@@ -21,7 +22,8 @@
     },
     {
       "name": "charizard",
-      "url": "https://pokeapi.co/api/v2/pokemon/6/"
+      "url": "https://pokeapi.co/api/v2/pokemon/6/",
+      "hasMega": true
     },
     {
       "name": "squirtle",
@@ -33,7 +35,8 @@
     },
     {
       "name": "blastoise",
-      "url": "https://pokeapi.co/api/v2/pokemon/9/"
+      "url": "https://pokeapi.co/api/v2/pokemon/9/",
+      "hasMega": true
     },
     {
       "name": "caterpie",
@@ -57,7 +60,8 @@
     },
     {
       "name": "beedrill",
-      "url": "https://pokeapi.co/api/v2/pokemon/15/"
+      "url": "https://pokeapi.co/api/v2/pokemon/15/",
+      "hasMega": true
     },
     {
       "name": "pidgey",
@@ -69,15 +73,18 @@
     },
     {
       "name": "pidgeot",
-      "url": "https://pokeapi.co/api/v2/pokemon/18/"
+      "url": "https://pokeapi.co/api/v2/pokemon/18/",
+      "hasMega": true
     },
     {
       "name": "rattata",
-      "url": "https://pokeapi.co/api/v2/pokemon/19/"
+      "url": "https://pokeapi.co/api/v2/pokemon/19/",
+      "alola": true
     },
     {
       "name": "raticate",
-      "url": "https://pokeapi.co/api/v2/pokemon/20/"
+      "url": "https://pokeapi.co/api/v2/pokemon/20/",
+      "alola": true
     },
     {
       "name": "spearow",
@@ -101,15 +108,18 @@
     },
     {
       "name": "raichu",
-      "url": "https://pokeapi.co/api/v2/pokemon/26/"
+      "url": "https://pokeapi.co/api/v2/pokemon/26/",
+      "alola": true
     },
     {
       "name": "sandshrew",
-      "url": "https://pokeapi.co/api/v2/pokemon/27/"
+      "url": "https://pokeapi.co/api/v2/pokemon/27/",
+      "alola": true
     },
     {
       "name": "sandslash",
-      "url": "https://pokeapi.co/api/v2/pokemon/28/"
+      "url": "https://pokeapi.co/api/v2/pokemon/28/",
+      "alola": true
     },
     {
       "name": "nidoran-f",
@@ -145,11 +155,13 @@
     },
     {
       "name": "vulpix",
-      "url": "https://pokeapi.co/api/v2/pokemon/37/"
+      "url": "https://pokeapi.co/api/v2/pokemon/37/",
+      "alola": true
     },
     {
       "name": "ninetales",
-      "url": "https://pokeapi.co/api/v2/pokemon/38/"
+      "url": "https://pokeapi.co/api/v2/pokemon/38/",
+      "alola": true
     },
     {
       "name": "jigglypuff",
@@ -197,19 +209,24 @@
     },
     {
       "name": "diglett",
-      "url": "https://pokeapi.co/api/v2/pokemon/50/"
+      "url": "https://pokeapi.co/api/v2/pokemon/50/",
+      "alola": true
     },
     {
       "name": "dugtrio",
-      "url": "https://pokeapi.co/api/v2/pokemon/51/"
+      "url": "https://pokeapi.co/api/v2/pokemon/51/",
+      "alola": true
     },
     {
       "name": "meowth",
-      "url": "https://pokeapi.co/api/v2/pokemon/52/"
+      "url": "https://pokeapi.co/api/v2/pokemon/52/",
+      "alola": true,
+      "galar": true
     },
     {
       "name": "persian",
-      "url": "https://pokeapi.co/api/v2/pokemon/53/"
+      "url": "https://pokeapi.co/api/v2/pokemon/53/",
+      "alola": true
     },
     {
       "name": "psyduck",
@@ -257,7 +274,8 @@
     },
     {
       "name": "alakazam",
-      "url": "https://pokeapi.co/api/v2/pokemon/65/"
+      "url": "https://pokeapi.co/api/v2/pokemon/65/",
+      "hasMega": true
     },
     {
       "name": "machop",
@@ -293,31 +311,39 @@
     },
     {
       "name": "geodude",
-      "url": "https://pokeapi.co/api/v2/pokemon/74/"
+      "url": "https://pokeapi.co/api/v2/pokemon/74/",
+      "alola": true
     },
     {
       "name": "graveler",
-      "url": "https://pokeapi.co/api/v2/pokemon/75/"
+      "url": "https://pokeapi.co/api/v2/pokemon/75/",
+      "alola": true
     },
     {
       "name": "golem",
-      "url": "https://pokeapi.co/api/v2/pokemon/76/"
+      "url": "https://pokeapi.co/api/v2/pokemon/76/",
+      "alola": true
     },
     {
       "name": "ponyta",
-      "url": "https://pokeapi.co/api/v2/pokemon/77/"
+      "url": "https://pokeapi.co/api/v2/pokemon/77/",
+      "galar": true
     },
     {
       "name": "rapidash",
-      "url": "https://pokeapi.co/api/v2/pokemon/78/"
+      "url": "https://pokeapi.co/api/v2/pokemon/78/",
+      "galar": true
     },
     {
       "name": "slowpoke",
-      "url": "https://pokeapi.co/api/v2/pokemon/79/"
+      "url": "https://pokeapi.co/api/v2/pokemon/79/",
+      "galar": true
     },
     {
       "name": "slowbro",
-      "url": "https://pokeapi.co/api/v2/pokemon/80/"
+      "url": "https://pokeapi.co/api/v2/pokemon/80/",
+      "galar": true,
+      "hasMega": true
     },
     {
       "name": "magnemite",
@@ -329,7 +355,8 @@
     },
     {
       "name": "farfetchd",
-      "url": "https://pokeapi.co/api/v2/pokemon/83/"
+      "url": "https://pokeapi.co/api/v2/pokemon/83/",
+      "galar": true
     },
     {
       "name": "doduo",
@@ -349,11 +376,13 @@
     },
     {
       "name": "grimer",
-      "url": "https://pokeapi.co/api/v2/pokemon/88/"
+      "url": "https://pokeapi.co/api/v2/pokemon/88/",
+      "alola": true
     },
     {
       "name": "muk",
-      "url": "https://pokeapi.co/api/v2/pokemon/89/"
+      "url": "https://pokeapi.co/api/v2/pokemon/89/",
+      "alola": true
     },
     {
       "name": "shellder",
@@ -373,7 +402,8 @@
     },
     {
       "name": "gengar",
-      "url": "https://pokeapi.co/api/v2/pokemon/94/"
+      "url": "https://pokeapi.co/api/v2/pokemon/94/",
+      "hasMega": true
     },
     {
       "name": "onix",
@@ -409,7 +439,8 @@
     },
     {
       "name": "exeggutor",
-      "url": "https://pokeapi.co/api/v2/pokemon/103/"
+      "url": "https://pokeapi.co/api/v2/pokemon/103/",
+      "alola": true
     },
     {
       "name": "cubone",
@@ -417,7 +448,8 @@
     },
     {
       "name": "marowak",
-      "url": "https://pokeapi.co/api/v2/pokemon/105/"
+      "url": "https://pokeapi.co/api/v2/pokemon/105/",
+      "alola": true
     },
     {
       "name": "hitmonlee",
@@ -437,7 +469,8 @@
     },
     {
       "name": "weezing",
-      "url": "https://pokeapi.co/api/v2/pokemon/110/"
+      "url": "https://pokeapi.co/api/v2/pokemon/110/",
+      "galar": true
     },
     {
       "name": "rhyhorn",
@@ -457,7 +490,8 @@
     },
     {
       "name": "kangaskhan",
-      "url": "https://pokeapi.co/api/v2/pokemon/115/"
+      "url": "https://pokeapi.co/api/v2/pokemon/115/",
+      "hasMega": true
     },
     {
       "name": "horsea",
@@ -485,7 +519,8 @@
     },
     {
       "name": "mr-mime",
-      "url": "https://pokeapi.co/api/v2/pokemon/122/"
+      "url": "https://pokeapi.co/api/v2/pokemon/122/",
+      "galar": true
     },
     {
       "name": "scyther",
@@ -505,7 +540,8 @@
     },
     {
       "name": "pinsir",
-      "url": "https://pokeapi.co/api/v2/pokemon/127/"
+      "url": "https://pokeapi.co/api/v2/pokemon/127/",
+      "hasMega": true
     },
     {
       "name": "tauros",
@@ -517,7 +553,8 @@
     },
     {
       "name": "gyarados",
-      "url": "https://pokeapi.co/api/v2/pokemon/130/"
+      "url": "https://pokeapi.co/api/v2/pokemon/130/",
+      "hasMega": true
     },
     {
       "name": "lapras",
@@ -565,7 +602,8 @@
     },
     {
       "name": "aerodactyl",
-      "url": "https://pokeapi.co/api/v2/pokemon/142/"
+      "url": "https://pokeapi.co/api/v2/pokemon/142/",
+      "hasMega": true
     },
     {
       "name": "snorlax",
@@ -573,15 +611,18 @@
     },
     {
       "name": "articuno",
-      "url": "https://pokeapi.co/api/v2/pokemon/144/"
+      "url": "https://pokeapi.co/api/v2/pokemon/144/",
+      "galar": true
     },
     {
       "name": "zapdos",
-      "url": "https://pokeapi.co/api/v2/pokemon/145/"
+      "url": "https://pokeapi.co/api/v2/pokemon/145/",
+      "galar": true
     },
     {
       "name": "moltres",
-      "url": "https://pokeapi.co/api/v2/pokemon/146/"
+      "url": "https://pokeapi.co/api/v2/pokemon/146/",
+      "galar": true
     },
     {
       "name": "dratini",
@@ -597,7 +638,8 @@
     },
     {
       "name": "mewtwo",
-      "url": "https://pokeapi.co/api/v2/pokemon/150/"
+      "url": "https://pokeapi.co/api/v2/pokemon/150/",
+      "hasMega": true
     },
     {
       "name": "mew",
@@ -721,7 +763,8 @@
     },
     {
       "name": "ampharos",
-      "url": "https://pokeapi.co/api/v2/pokemon/181/"
+      "url": "https://pokeapi.co/api/v2/pokemon/181/",
+      "hasMega": true
     },
     {
       "name": "bellossom",
@@ -793,7 +836,8 @@
     },
     {
       "name": "slowking",
-      "url": "https://pokeapi.co/api/v2/pokemon/199/"
+      "url": "https://pokeapi.co/api/v2/pokemon/199/",
+      "galar": true
     },
     {
       "name": "misdreavus",
@@ -829,7 +873,8 @@
     },
     {
       "name": "steelix",
-      "url": "https://pokeapi.co/api/v2/pokemon/208/"
+      "url": "https://pokeapi.co/api/v2/pokemon/208/",
+      "hasMega": true
     },
     {
       "name": "snubbull",
@@ -845,7 +890,8 @@
     },
     {
       "name": "scizor",
-      "url": "https://pokeapi.co/api/v2/pokemon/212/"
+      "url": "https://pokeapi.co/api/v2/pokemon/212/",
+      "hasMega": true
     },
     {
       "name": "shuckle",
@@ -853,7 +899,8 @@
     },
     {
       "name": "heracross",
-      "url": "https://pokeapi.co/api/v2/pokemon/214/"
+      "url": "https://pokeapi.co/api/v2/pokemon/214/",
+      "hasMega": true
     },
     {
       "name": "sneasel",
@@ -885,7 +932,8 @@
     },
     {
       "name": "corsola",
-      "url": "https://pokeapi.co/api/v2/pokemon/222/"
+      "url": "https://pokeapi.co/api/v2/pokemon/222/",
+      "galar": true
     },
     {
       "name": "remoraid",
@@ -913,7 +961,8 @@
     },
     {
       "name": "houndoom",
-      "url": "https://pokeapi.co/api/v2/pokemon/229/"
+      "url": "https://pokeapi.co/api/v2/pokemon/229/",
+      "hasMega": true
     },
     {
       "name": "kingdra",
@@ -989,7 +1038,8 @@
     },
     {
       "name": "tyranitar",
-      "url": "https://pokeapi.co/api/v2/pokemon/248/"
+      "url": "https://pokeapi.co/api/v2/pokemon/248/",
+      "hasMega": true
     },
     {
       "name": "lugia",
@@ -1013,7 +1063,8 @@
     },
     {
       "name": "sceptile",
-      "url": "https://pokeapi.co/api/v2/pokemon/254/"
+      "url": "https://pokeapi.co/api/v2/pokemon/254/",
+      "hasMega": true
     },
     {
       "name": "torchic",
@@ -1025,7 +1076,8 @@
     },
     {
       "name": "blaziken",
-      "url": "https://pokeapi.co/api/v2/pokemon/257/"
+      "url": "https://pokeapi.co/api/v2/pokemon/257/",
+      "hasMega": true
     },
     {
       "name": "mudkip",
@@ -1037,7 +1089,8 @@
     },
     {
       "name": "swampert",
-      "url": "https://pokeapi.co/api/v2/pokemon/260/"
+      "url": "https://pokeapi.co/api/v2/pokemon/260/",
+      "hasMega": true
     },
     {
       "name": "poochyena",
@@ -1049,11 +1102,13 @@
     },
     {
       "name": "zigzagoon",
-      "url": "https://pokeapi.co/api/v2/pokemon/263/"
+      "url": "https://pokeapi.co/api/v2/pokemon/263/",
+      "galar": true
     },
     {
       "name": "linoone",
-      "url": "https://pokeapi.co/api/v2/pokemon/264/"
+      "url": "https://pokeapi.co/api/v2/pokemon/264/",
+      "galar": true
     },
     {
       "name": "wurmple",
@@ -1125,7 +1180,8 @@
     },
     {
       "name": "gardevoir",
-      "url": "https://pokeapi.co/api/v2/pokemon/282/"
+      "url": "https://pokeapi.co/api/v2/pokemon/282/",
+      "hasMega": true
     },
     {
       "name": "surskit",
@@ -1205,11 +1261,13 @@
     },
     {
       "name": "sableye",
-      "url": "https://pokeapi.co/api/v2/pokemon/302/"
+      "url": "https://pokeapi.co/api/v2/pokemon/302/",
+      "hasMega": true
     },
     {
       "name": "mawile",
-      "url": "https://pokeapi.co/api/v2/pokemon/303/"
+      "url": "https://pokeapi.co/api/v2/pokemon/303/",
+      "hasMega": true
     },
     {
       "name": "aron",
@@ -1221,7 +1279,8 @@
     },
     {
       "name": "aggron",
-      "url": "https://pokeapi.co/api/v2/pokemon/306/"
+      "url": "https://pokeapi.co/api/v2/pokemon/306/",
+      "hasMega": true
     },
     {
       "name": "meditite",
@@ -1229,7 +1288,8 @@
     },
     {
       "name": "medicham",
-      "url": "https://pokeapi.co/api/v2/pokemon/308/"
+      "url": "https://pokeapi.co/api/v2/pokemon/308/",
+      "hasMega": true
     },
     {
       "name": "electrike",
@@ -1237,7 +1297,8 @@
     },
     {
       "name": "manectric",
-      "url": "https://pokeapi.co/api/v2/pokemon/310/"
+      "url": "https://pokeapi.co/api/v2/pokemon/310/",
+      "hasMega": true
     },
     {
       "name": "plusle",
@@ -1273,7 +1334,8 @@
     },
     {
       "name": "sharpedo",
-      "url": "https://pokeapi.co/api/v2/pokemon/319/"
+      "url": "https://pokeapi.co/api/v2/pokemon/319/",
+      "hasMega": true
     },
     {
       "name": "wailmer",
@@ -1289,7 +1351,8 @@
     },
     {
       "name": "camerupt",
-      "url": "https://pokeapi.co/api/v2/pokemon/323/"
+      "url": "https://pokeapi.co/api/v2/pokemon/323/",
+      "hasMega": true
     },
     {
       "name": "torkoal",
@@ -1333,7 +1396,8 @@
     },
     {
       "name": "altaria",
-      "url": "https://pokeapi.co/api/v2/pokemon/334/"
+      "url": "https://pokeapi.co/api/v2/pokemon/334/",
+      "hasMega": true
     },
     {
       "name": "zangoose",
@@ -1413,7 +1477,8 @@
     },
     {
       "name": "banette",
-      "url": "https://pokeapi.co/api/v2/pokemon/354/"
+      "url": "https://pokeapi.co/api/v2/pokemon/354/",
+      "hasMega": true
     },
     {
       "name": "duskull",
@@ -1433,7 +1498,8 @@
     },
     {
       "name": "absol",
-      "url": "https://pokeapi.co/api/v2/pokemon/359/"
+      "url": "https://pokeapi.co/api/v2/pokemon/359/",
+      "hasMega": true
     },
     {
       "name": "wynaut",
@@ -1445,7 +1511,8 @@
     },
     {
       "name": "glalie",
-      "url": "https://pokeapi.co/api/v2/pokemon/362/"
+      "url": "https://pokeapi.co/api/v2/pokemon/362/",
+      "hasMega": true
     },
     {
       "name": "spheal",
@@ -1489,7 +1556,8 @@
     },
     {
       "name": "salamence",
-      "url": "https://pokeapi.co/api/v2/pokemon/373/"
+      "url": "https://pokeapi.co/api/v2/pokemon/373/",
+      "hasMega": true
     },
     {
       "name": "beldum",
@@ -1501,7 +1569,8 @@
     },
     {
       "name": "metagross",
-      "url": "https://pokeapi.co/api/v2/pokemon/376/"
+      "url": "https://pokeapi.co/api/v2/pokemon/376/",
+      "hasMega": true
     },
     {
       "name": "regirock",
@@ -1517,11 +1586,13 @@
     },
     {
       "name": "latias",
-      "url": "https://pokeapi.co/api/v2/pokemon/380/"
+      "url": "https://pokeapi.co/api/v2/pokemon/380/",
+      "hasMega": true
     },
     {
       "name": "latios",
-      "url": "https://pokeapi.co/api/v2/pokemon/381/"
+      "url": "https://pokeapi.co/api/v2/pokemon/381/",
+      "hasMega": true
     },
     {
       "name": "kyogre",
@@ -1533,7 +1604,8 @@
     },
     {
       "name": "rayquaza",
-      "url": "https://pokeapi.co/api/v2/pokemon/384/"
+      "url": "https://pokeapi.co/api/v2/pokemon/384/",
+      "hasMega": true
     },
     {
       "name": "jirachi",
@@ -1709,7 +1781,8 @@
     },
     {
       "name": "lopunny",
-      "url": "https://pokeapi.co/api/v2/pokemon/428/"
+      "url": "https://pokeapi.co/api/v2/pokemon/428/",
+      "hasMega": true
     },
     {
       "name": "mismagius",
@@ -1777,7 +1850,8 @@
     },
     {
       "name": "garchomp",
-      "url": "https://pokeapi.co/api/v2/pokemon/445/"
+      "url": "https://pokeapi.co/api/v2/pokemon/445/",
+      "hasMega": true
     },
     {
       "name": "munchlax",
@@ -1789,7 +1863,8 @@
     },
     {
       "name": "lucario",
-      "url": "https://pokeapi.co/api/v2/pokemon/448/"
+      "url": "https://pokeapi.co/api/v2/pokemon/448/",
+      "hasMega": true
     },
     {
       "name": "hippopotas",
@@ -1837,7 +1912,8 @@
     },
     {
       "name": "abomasnow",
-      "url": "https://pokeapi.co/api/v2/pokemon/460/"
+      "url": "https://pokeapi.co/api/v2/pokemon/460/",
+      "hasMega": true
     },
     {
       "name": "weavile",
@@ -1897,7 +1973,8 @@
     },
     {
       "name": "gallade",
-      "url": "https://pokeapi.co/api/v2/pokemon/475/"
+      "url": "https://pokeapi.co/api/v2/pokemon/475/",
+      "hasMega": true
     },
     {
       "name": "probopass",
@@ -2121,7 +2198,8 @@
     },
     {
       "name": "audino",
-      "url": "https://pokeapi.co/api/v2/pokemon/531/"
+      "url": "https://pokeapi.co/api/v2/pokemon/531/",
+      "hasMega": true
     },
     {
       "name": "timburr",
@@ -2213,11 +2291,13 @@
     },
     {
       "name": "darumaka",
-      "url": "https://pokeapi.co/api/v2/pokemon/554/"
+      "url": "https://pokeapi.co/api/v2/pokemon/554/",
+      "galar": true
     },
     {
       "name": "darmanitan-standard",
-      "url": "https://pokeapi.co/api/v2/pokemon/555/"
+      "url": "https://pokeapi.co/api/v2/pokemon/555/",
+      "galar": true
     },
     {
       "name": "maractus",
@@ -2245,7 +2325,8 @@
     },
     {
       "name": "yamask",
-      "url": "https://pokeapi.co/api/v2/pokemon/562/"
+      "url": "https://pokeapi.co/api/v2/pokemon/562/",
+      "galar": true
     },
     {
       "name": "cofagrigus",
@@ -2469,7 +2550,8 @@
     },
     {
       "name": "stunfisk",
-      "url": "https://pokeapi.co/api/v2/pokemon/618/"
+      "url": "https://pokeapi.co/api/v2/pokemon/618/",
+      "galar": true
     },
     {
       "name": "mienfoo",
@@ -2873,7 +2955,8 @@
     },
     {
       "name": "diancie",
-      "url": "https://pokeapi.co/api/v2/pokemon/719/"
+      "url": "https://pokeapi.co/api/v2/pokemon/719/",
+      "hasMega": true
     },
     {
       "name": "hoopa",
