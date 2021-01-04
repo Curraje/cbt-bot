@@ -1,7 +1,8 @@
 // Use this function to load data as a specific type
 export async function loadData<T>(dataPath: string, someType: T): Promise<T>
 {
-    return await import(`${dataPath}`) as typeof someType;
+    const data = await import(`${dataPath}`);
+    return data.default as typeof someType;
 }
 
 // use lodash random instead
