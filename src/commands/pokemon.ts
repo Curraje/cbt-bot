@@ -15,6 +15,7 @@
 // Different form text entries
 // unown pictures
 // Chance to show shiny on random
+// Pikachu Special Forms
 
 import {IBotCommand, IBot, Discord, pokedex, IBotCommandInfo, CategoryTypes, Argument} from '../api';
 
@@ -94,7 +95,7 @@ export default class PokemonCommand implements IBotCommand
 
         let textEntry = `Cannot find pokemon with name or number **${args.join(' ')}**. Does that pokemon actually exist?`;
 
-        let item: pokeData = {name: '', url:'', alola: false, galar: false, hasMega: false};
+        let item: pokeData = {name: '', url:'', alola: false, galar: false, hasMega: false, forms: []};
 
         const shiny = this.SHINY_REGEX.test(request.toString());
         const mega = this.MEGA_REGEX.test(request.toString());
