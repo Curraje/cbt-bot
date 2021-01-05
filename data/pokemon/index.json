@@ -847,7 +847,8 @@
     },
     {
       "name": "unown",
-      "url": "https://pokeapi.co/api/v2/pokemon/201/"
+      "url": "https://pokeapi.co/api/v2/pokemon/201/",
+      "forms": ["a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "!", "?"]
     },
     {
       "name": "wobbuffet",
@@ -1467,7 +1468,8 @@
     },
     {
       "name": "castform",
-      "url": "https://pokeapi.co/api/v2/pokemon/351/"
+      "url": "https://pokeapi.co/api/v2/pokemon/351/",
+      "forms": ["sunny", "rainy", "snowy"]
     },
     {
       "name": "kecleon",
@@ -1598,11 +1600,13 @@
     },
     {
       "name": "kyogre",
-      "url": "https://pokeapi.co/api/v2/pokemon/382/"
+      "url": "https://pokeapi.co/api/v2/pokemon/382/",
+      "forms": ["primal"]
     },
     {
       "name": "groudon",
-      "url": "https://pokeapi.co/api/v2/pokemon/383/"
+      "url": "https://pokeapi.co/api/v2/pokemon/383/",
+      "forms": ["primal"]
     },
     {
       "name": "rayquaza",
@@ -1615,7 +1619,8 @@
     },
     {
       "name": "deoxys-normal",
-      "url": "https://pokeapi.co/api/v2/pokemon/386/"
+      "url": "https://pokeapi.co/api/v2/pokemon/386/",
+      "forms": ["attack", "defense", "speed"]
     },
     {
       "name": "turtwig",
@@ -1719,11 +1724,13 @@
     },
     {
       "name": "burmy",
-      "url": "https://pokeapi.co/api/v2/pokemon/412/"
+      "url": "https://pokeapi.co/api/v2/pokemon/412/",
+      "forms": ["sandy", "trash", "plant"]
     },
     {
       "name": "wormadam-plant",
-      "url": "https://pokeapi.co/api/v2/pokemon/413/"
+      "url": "https://pokeapi.co/api/v2/pokemon/413/",
+      "forms": ["sandy", "trash", "plant"]
     },
     {
       "name": "mothim",
@@ -1755,7 +1762,8 @@
     },
     {
       "name": "cherrim",
-      "url": "https://pokeapi.co/api/v2/pokemon/421/"
+      "url": "https://pokeapi.co/api/v2/pokemon/421/",
+      "forms": ["overcast", "sunshine"]
     },
     {
       "name": "shellos",
@@ -1992,7 +2000,8 @@
     },
     {
       "name": "rotom",
-      "url": "https://pokeapi.co/api/v2/pokemon/479/"
+      "url": "https://pokeapi.co/api/v2/pokemon/479/",
+      "forms": ["heat","wash","frost","fan","mow"]
     },
     {
       "name": "uxie",
@@ -2024,7 +2033,8 @@
     },
     {
       "name": "giratina-altered",
-      "url": "https://pokeapi.co/api/v2/pokemon/487/"
+      "url": "https://pokeapi.co/api/v2/pokemon/487/",
+      "forms": ["origin"]
     },
     {
       "name": "cresselia",
@@ -2044,11 +2054,13 @@
     },
     {
       "name": "shaymin-land",
-      "url": "https://pokeapi.co/api/v2/pokemon/492/"
+      "url": "https://pokeapi.co/api/v2/pokemon/492/",
+      "forms": ["land", "sky"]
     },
     {
       "name": "arceus",
-      "url": "https://pokeapi.co/api/v2/pokemon/493/"
+      "url": "https://pokeapi.co/api/v2/pokemon/493/",
+      "forms": ["fire","water","electric","grass","ice","fighting","poison","ground","flying","psychic","bug","rock","ghost","dragon","dark","steel","fairy"]
     },
     {
       "name": "victini",
@@ -2299,7 +2311,8 @@
     {
       "name": "darmanitan-standard",
       "url": "https://pokeapi.co/api/v2/pokemon/555/",
-      "galar": true
+      "galar": true,
+      "forms": ["zen"]
     },
     {
       "name": "maractus",
@@ -2420,11 +2433,13 @@
     },
     {
       "name": "deerling",
-      "url": "https://pokeapi.co/api/v2/pokemon/585/"
+      "url": "https://pokeapi.co/api/v2/pokemon/585/",
+      "forms": ["spring", "summer", "autumn", "winter"]
     },
     {
       "name": "sawsbuck",
-      "url": "https://pokeapi.co/api/v2/pokemon/586/"
+      "url": "https://pokeapi.co/api/v2/pokemon/586/",
+      "forms": ["spring", "summer", "autumn", "winter"]
     },
     {
       "name": "emolga",
@@ -2645,11 +2660,13 @@
     },
     {
       "name": "tornadus-incarnate",
-      "url": "https://pokeapi.co/api/v2/pokemon/641/"
+      "url": "https://pokeapi.co/api/v2/pokemon/641/",
+      "forms": ["therian"]
     },
     {
       "name": "thundurus-incarnate",
-      "url": "https://pokeapi.co/api/v2/pokemon/642/"
+      "url": "https://pokeapi.co/api/v2/pokemon/642/",
+      "forms": ["therian"]
     },
     {
       "name": "reshiram",
@@ -2661,19 +2678,23 @@
     },
     {
       "name": "landorus-incarnate",
-      "url": "https://pokeapi.co/api/v2/pokemon/645/"
+      "url": "https://pokeapi.co/api/v2/pokemon/645/",
+      "forms": ["therian"]
     },
     {
       "name": "kyurem",
-      "url": "https://pokeapi.co/api/v2/pokemon/646/"
+      "url": "https://pokeapi.co/api/v2/pokemon/646/",
+      "forms": ["white", "black"]
     },
     {
       "name": "keldeo-ordinary",
-      "url": "https://pokeapi.co/api/v2/pokemon/647/"
+      "url": "https://pokeapi.co/api/v2/pokemon/647/",
+      "forms": ["resolute"]
     },
     {
       "name": "meloetta-aria",
-      "url": "https://pokeapi.co/api/v2/pokemon/648/"
+      "url": "https://pokeapi.co/api/v2/pokemon/648/",
+      "forms": ["pirouette"]
     },
     {
       "name": "genesect",
@@ -2713,7 +2734,8 @@
     },
     {
       "name": "greninja",
-      "url": "https://pokeapi.co/api/v2/pokemon/658/"
+      "url": "https://pokeapi.co/api/v2/pokemon/658/",
+      "forms": ["ash"]
     },
     {
       "name": "bunnelby",
@@ -2745,7 +2767,8 @@
     },
     {
       "name": "vivillon",
-      "url": "https://pokeapi.co/api/v2/pokemon/666/"
+      "url": "https://pokeapi.co/api/v2/pokemon/666/",
+      "forms": ["archipelago","continental","elegant","garden","high-plains","icy-snow","jungle","marine","meadow","modern","monsoon","ocean","polar","river","sandstorm","savanna","sun","tundra","pokeball","fancy"]
     },
     {
       "name": "litleo",
@@ -2757,15 +2780,18 @@
     },
     {
       "name": "flabebe",
-      "url": "https://pokeapi.co/api/v2/pokemon/669/"
+      "url": "https://pokeapi.co/api/v2/pokemon/669/",
+      "forms": ["red-flower", "yellow-flower", "orange-flower", "blue-flower", "white-flower"]
     },
     {
       "name": "floette",
-      "url": "https://pokeapi.co/api/v2/pokemon/670/"
+      "url": "https://pokeapi.co/api/v2/pokemon/670/",
+      "forms": ["red-flower", "yellow-flower", "orange-flower", "blue-flower", "white-flower", "eternal-flower"]
     },
     {
       "name": "florges",
-      "url": "https://pokeapi.co/api/v2/pokemon/671/"
+      "url": "https://pokeapi.co/api/v2/pokemon/671/",
+      "forms": ["red-flower", "yellow-flower", "orange-flower", "blue-flower", "white-flower"]
     },
     {
       "name": "skiddo",
@@ -2785,7 +2811,8 @@
     },
     {
       "name": "furfrou",
-      "url": "https://pokeapi.co/api/v2/pokemon/676/"
+      "url": "https://pokeapi.co/api/v2/pokemon/676/",
+      "forms": ["heart", "star", "diamond", "debutante", "matron", "dandy", "la reine", "kakuki", "pharaoh"]
     },
     {
       "name": "espurr",
@@ -2805,7 +2832,8 @@
     },
     {
       "name": "aegislash-shield",
-      "url": "https://pokeapi.co/api/v2/pokemon/681/"
+      "url": "https://pokeapi.co/api/v2/pokemon/681/",
+      "forms": ["blade", "shield"]
     },
     {
       "name": "spritzee",
@@ -2921,11 +2949,13 @@
     },
     {
       "name": "pumpkaboo-average",
-      "url": "https://pokeapi.co/api/v2/pokemon/710/"
+      "url": "https://pokeapi.co/api/v2/pokemon/710/",
+      "forms": ["small","average","large","super"]
     },
     {
       "name": "gourgeist-average",
-      "url": "https://pokeapi.co/api/v2/pokemon/711/"
+      "url": "https://pokeapi.co/api/v2/pokemon/711/",
+      "forms": ["small","average","large","super"]
     },
     {
       "name": "bergmite",
@@ -2953,7 +2983,8 @@
     },
     {
       "name": "zygarde",
-      "url": "https://pokeapi.co/api/v2/pokemon/718/"
+      "url": "https://pokeapi.co/api/v2/pokemon/718/",
+      "forms": ["10%", "Complete"]
     },
     {
       "name": "diancie",
@@ -2962,7 +2993,8 @@
     },
     {
       "name": "hoopa",
-      "url": "https://pokeapi.co/api/v2/pokemon/720/"
+      "url": "https://pokeapi.co/api/v2/pokemon/720/",
+      "forms": ["confined", "unbound"]
     },
     {
       "name": "volcanion",
@@ -3046,7 +3078,8 @@
     },
     {
       "name": "oricorio-baile",
-      "url": "https://pokeapi.co/api/v2/pokemon/741/"
+      "url": "https://pokeapi.co/api/v2/pokemon/741/",
+      "forms": ["baile", "pom-pom", "pau", "sensu"]
     },
     {
       "name": "cutiefly",
@@ -3062,11 +3095,13 @@
     },
     {
       "name": "lycanroc-midday",
-      "url": "https://pokeapi.co/api/v2/pokemon/745/"
+      "url": "https://pokeapi.co/api/v2/pokemon/745/",
+      "forms": ["midday", "midnight", "dusk"]
     },
     {
       "name": "wishiwashi-solo",
-      "url": "https://pokeapi.co/api/v2/pokemon/746/"
+      "url": "https://pokeapi.co/api/v2/pokemon/746/",
+      "forms": ["school"]
     },
     {
       "name": "mareanie",
@@ -3174,11 +3209,13 @@
     },
     {
       "name": "silvally",
-      "url": "https://pokeapi.co/api/v2/pokemon/773/"
+      "url": "https://pokeapi.co/api/v2/pokemon/773/",
+      "forms": ["fire","water","electric","grass","ice","fighting","poison","ground","flying","psychic","bug","rock","ghost","dragon","dark","steel","fairy"]
     },
     {
       "name": "minior-red-meteor",
-      "url": "https://pokeapi.co/api/v2/pokemon/774/"
+      "url": "https://pokeapi.co/api/v2/pokemon/774/",
+      "forms": ["red-meteor", "orange-meteor", "yellow-meteor", "green-meteor", "blue-meteor", "indigo-meteor", "violet-meteor", "red-core", "orange-core", "yellow-core", "green-core","blue-core","indigo-core","violet-core"]
     },
     {
       "name": "komala",
@@ -3194,7 +3231,8 @@
     },
     {
       "name": "mimikyu-disguised",
-      "url": "https://pokeapi.co/api/v2/pokemon/778/"
+      "url": "https://pokeapi.co/api/v2/pokemon/778/",
+      "forms": ["disguised", "busted"]
     },
     {
       "name": "bruxish",
@@ -3282,11 +3320,13 @@
     },
     {
       "name": "necrozma",
-      "url": "https://pokeapi.co/api/v2/pokemon/800/"
+      "url": "https://pokeapi.co/api/v2/pokemon/800/",
+      "forms": ["dusk-mane","dawn-wings","ultra"]
     },
     {
       "name": "magearna",
-      "url": "https://pokeapi.co/api/v2/pokemon/801/"
+      "url": "https://pokeapi.co/api/v2/pokemon/801/",
+      "forms": ["original-color"]
     },
     {
       "name": "marshadow",
@@ -3462,7 +3502,8 @@
     },
     {
       "name": "cramorant",
-      "url": "https://pokeapi.co/api/v2/pokemon/845/"
+      "url": "https://pokeapi.co/api/v2/pokemon/845/",
+      "forms": ["gulping","gorging"]
     },
     {
       "name": "arrokuda",
@@ -3478,7 +3519,8 @@
     },
     {
       "name": "toxtricity-amped",
-      "url": "https://pokeapi.co/api/v2/pokemon/849/"
+      "url": "https://pokeapi.co/api/v2/pokemon/849/",
+      "forms": ["amped", "low-key"]
     },
     {
       "name": "sizzlipede",
@@ -3498,11 +3540,13 @@
     },
     {
       "name": "sinistea",
-      "url": "https://pokeapi.co/api/v2/pokemon/854/"
+      "url": "https://pokeapi.co/api/v2/pokemon/854/",
+      "forms": ["phony", "antique"]
     },
     {
       "name": "polteageist",
-      "url": "https://pokeapi.co/api/v2/pokemon/855/"
+      "url": "https://pokeapi.co/api/v2/pokemon/855/",
+      "forms": ["phony", "antique"]
     },
     {
       "name": "hatenna",
@@ -3558,7 +3602,8 @@
     },
     {
       "name": "alcremie",
-      "url": "https://pokeapi.co/api/v2/pokemon/869/"
+      "url": "https://pokeapi.co/api/v2/pokemon/869/",
+      "forms": ["vanilla","ruby","matcha","mint","lemon","salted","ruby-swirl","caramel-swirl","rainbow-swirl"]
     },
     {
       "name": "falinks",
@@ -3582,7 +3627,8 @@
     },
     {
       "name": "eiscue-ice",
-      "url": "https://pokeapi.co/api/v2/pokemon/875/"
+      "url": "https://pokeapi.co/api/v2/pokemon/875/",
+      "forms": ["ice", "noice"]
     },
     {
       "name": "indeedee-male",
@@ -3590,7 +3636,8 @@
     },
     {
       "name": "morpeko",
-      "url": "https://pokeapi.co/api/v2/pokemon/877/"
+      "url": "https://pokeapi.co/api/v2/pokemon/877/",
+      "forms": ["full-belly", "hangry"]
     },
     {
       "name": "cufant",
@@ -3634,15 +3681,18 @@
     },
     {
       "name": "zacian-hero",
-      "url": "https://pokeapi.co/api/v2/pokemon/888/"
+      "url": "https://pokeapi.co/api/v2/pokemon/888/",
+      "forms": ["crowned-sword"]
     },
     {
       "name": "zamazenta-hero",
-      "url": "https://pokeapi.co/api/v2/pokemon/889/"
+      "url": "https://pokeapi.co/api/v2/pokemon/889/",
+      "forms": ["crowned-shield"]
     },
     {
       "name": "eternatus",
-      "url": "https://pokeapi.co/api/v2/pokemon/890/"
+      "url": "https://pokeapi.co/api/v2/pokemon/890/",
+      "forms": ["eternamax"]
     },
     {
       "name": "kubfu",
@@ -3650,7 +3700,8 @@
     },
     {
       "name": "urshifu-single-strike",
-      "url": "https://pokeapi.co/api/v2/pokemon/892/"
+      "url": "https://pokeapi.co/api/v2/pokemon/892/",
+      "forms": ["single-strike", "rapid-strike"]
     },
     {
       "name": "zarude",
@@ -3674,6 +3725,7 @@
     },
     {
       "name": "calyrex",
-      "url": "https://pokeapi.co/api/v2/pokemon/898/"
+      "url": "https://pokeapi.co/api/v2/pokemon/898/",
+      "forms": ["ice-rider", "shadow-rider"]
     }
 ]
