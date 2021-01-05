@@ -105,7 +105,8 @@
     },
     {
       "name": "pikachu",
-      "url": "https://pokeapi.co/api/v2/pokemon/25/"
+      "url": "https://pokeapi.co/api/v2/pokemon/25/",
+      "forms": ["cosplay", "rock-star", "belle", "pop-star", "phd", "libre", "original-cap", "hoenn-cap", "sinnoh-cap","unova-cap","kalos-cap","alola-cap","partner-cap","world-cap"]
     },
     {
       "name": "raichu",
