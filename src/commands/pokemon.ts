@@ -12,6 +12,9 @@
 // More examples for edge cases
 // May want to have a function to parse the pokemon data so code is more maintainable
 // Clear Cache for pokedex every once in a while so ram isn't perma doomed
+// Different form text entries
+// unown pictures
+// Chance to show shiny on random
 
 import {IBotCommand, IBot, Discord, pokedex, IBotCommandInfo, CategoryTypes, Argument} from '../api';
 
@@ -19,34 +22,7 @@ import {getRandomInt, capitalize, loadData} from '../helper';
 
 import { Pokemon } from 'pokedex-promise-v2';
 
-type Region = {
-    name: string,
-    generation: [string, number],
-    begin: number,
-    end: number,
-    new: number,
-    smogon: string
-}
-
-type pokeData = {
-    name: string,
-    url: string,
-    region?: Region,
-    galar?: boolean,
-    alola?: boolean,
-    hasMega?: boolean
-}
-
-const Regions = {
-    Kanto: {name: "Kanto", smogon: "RB", generation: ["I", 1], begin: 1, end: 151, new: 151} as Region,
-    Johto: {name: "Johto", smogon: "GS", generation: ["II", 2], begin: 152, end: 251, new: 100} as Region,
-    Hoenn: {name: "Hoenn", smogon: "RS", generation: ["III", 3], begin: 252, end: 386, new: 135} as Region,
-    Sinnoh: {name: "Sinnoh", smogon: "DP", generation: ["IV", 4], begin: 387, end: 493, new: 107} as Region,
-    Unova: {name: "Unova", smogon: "BW", generation: ["V", 5], begin: 494, end: 649, new: 156} as Region,
-    Kalos: {name: "Kalos", smogon: "XY", generation: ["VI", 6], begin: 650, end: 721, new: 72} as Region,
-    Alola: {name: "Alola", smogon: "SM", generation: ["VII", 7], begin: 722, end: 809, new: 88} as Region,
-    Galar: {name: "Galar", smogon: "SS", generation: ["VIII", 8], begin: 810, end: 898, new: 89} as Region,
-};
+import {Regions, pokeData} from '../pokehelper';
 
 export default class PokemonCommand implements IBotCommand
 {
@@ -77,10 +53,11 @@ export default class PokemonCommand implements IBotCommand
 
     private _defaultFormExceptions = ["mr-mime", "ho-oh", "mime-jr", "porygon-z", "type-null", "jangmo-o", "hakamo-o", "kommo-o", "tapu"];
 
-    private ALOLA_REGEX = /^.*(alola)$|^(alola).*$/;
-    private GALAR_REGEX = /^.*(galar)$|^(galar).*$/;
-    private SHINY_REGEX = /^(shiny).*$|^.*(shiny)/;
-    private CLEAN_REGEX = /-*(alolan|galarian|alola|galar|shiny)-*/;
+    private ALOLA_REGEX = /^.*alola|alola.*$/;
+    private GALAR_REGEX = /^.*galar|galar.*$/;
+    private SHINY_REGEX = /^.*shiny|shiny.*$/;
+    private MEGA_REGEX = /^.*mega|mega.*$/;
+    private CLEAN_REGEX = /-*(mega|alolan|galarian|shiny|alola|galar)-*/g;
 
     private readonly pokedexEnd = Regions.Galar.end;
 
@@ -120,12 +97,29 @@ export default class PokemonCommand implements IBotCommand
         let item: pokeData = {name: '', url:'', alola: false, galar: false, hasMega: false};
 
         const shiny = this.SHINY_REGEX.test(request.toString());
+        const mega = this.MEGA_REGEX.test(request.toString());
         const alolan = this.ALOLA_REGEX.test(request.toString());
         const galarian = this.GALAR_REGEX.test(request.toString());
 
+        let xy = '';
         let cleanRequest = request.toString().replace(this.CLEAN_REGEX, '');
+        if (mega && (cleanRequest.includes(`charizard`) || cleanRequest.includes(`mewtwo`)))
+        {
+            if (request.toString().includes(`y`))
+            {
+                xy = `y`;
+                cleanRequest = cleanRequest.replace(/[-xy]/g, '');
+            }
+            else
+            {
+                xy = `x`;
+                cleanRequest = cleanRequest.replace(/[-xy]/g, '');
+            }
+        }
 
-        // god help me with these forms and space names
+        // Check Request
+        // message.reply(`Clean Request: ${cleanRequest} | Request: ${request}`);
+
         if (typeof request === 'string')
         {
             item = this._Pokedex.find(data => { return data.name === cleanRequest || (data.name.split('-')[0] === cleanRequest
@@ -137,16 +131,15 @@ export default class PokemonCommand implements IBotCommand
                 item = this._Pokedex[re];
             }
 
-            if (!item.url || (alolan && galarian)) { message.reply(textEntry); return;}
+            if (!item.url || (alolan && galarian) || (mega && alolan) || (mega && galarian)) { message.reply(textEntry); return;}
         }
 
+        const validAlolan = alolan && !!(item.alola);
+        const validGalarian = galarian && !!(item.galar);
+        const validMega = mega && !!(item.hasMega);
         const url = typeof request === 'number' ? this._Pokedex[request - 1].url : item.url;
         const index = this._Pokedex.indexOf(item) + 1;
         console.log(item);
-
-        // Check Requests
-        message.reply(`Clean Request: ${cleanRequest} | Request: ${request}`);
-        if (shiny) { message.reply('✨'); }
 
         // Check if a form was requested and checks if that form exists
         if (alolan)
@@ -159,8 +152,21 @@ export default class PokemonCommand implements IBotCommand
             item.galar ? cleanRequest = `${cleanRequest}-galar`
                 : message.reply(`${capitalize(cleanRequest)} has no **galarian** form! Showing normal instead...`);
         }
+        else if (mega)
+        {
+            item.hasMega ? cleanRequest = `${cleanRequest}-mega`
+                : message.reply(`${capitalize(cleanRequest)} has no **mega** evolution! Showing normal instead...`);
 
-        const pokemon = (alolan && item.alola) || (galarian && item.galar)  ? pokedex.getPokemonByName(cleanRequest) : pokedex.resource(url);
+            if (item.hasXY)
+            {
+                cleanRequest = `${cleanRequest}-${xy}`;
+            }
+        }
+
+        // message.reply(`Clean Request After Form Checks: ${cleanRequest}`);
+
+        const pokemon = validAlolan || validGalarian || validMega  ?
+            pokedex.getPokemonByName(cleanRequest) : pokedex.resource(url);
         // const pokemonSpecies = pokedex.getPokemonSpeciesByName(index || request);
 
         const response = await Promise.all([pokemon, pokedex.getPokemonSpeciesByName(index || request)]).catch(err => {
@@ -171,7 +177,7 @@ export default class PokemonCommand implements IBotCommand
 
         // Get this down to a Promise.all(), always use id even if name is requested
         let artworkID, artworkName; // mon, species;
-        if (request.toString().includes('-'))
+        if (validAlolan || validMega || validGalarian)
         {
             artworkID = mon.id;
             artworkName = mon.name;
@@ -248,11 +254,20 @@ export default class PokemonCommand implements IBotCommand
             },
         ];
 
-        // const thumbnailURL = `http://img.pokemondb.net/sprites/black-white/anim/normal/${artworkName}.gif`;
-        //https://img.pokemondb.net/artwork/large/slowpoke-galarian.jpg
-        const thumbnailURL = `https://www.smogon.com/dex/media/sprites/xy/${artworkName}.gif`;
+        let thumbnailURL = `https://www.smogon.com/dex/media/sprites/xy/${artworkName}.gif`;
+        let imageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${artworkID}.png`;
         const formattedName = species.name.replace(/[-]/g, ' ').split(' ');
         formattedName.forEach(n => { formattedName[formattedName.indexOf(n)] = capitalize(n); });
+
+        if (validGalarian) { formattedName.unshift(`Galarian`);}
+        if (validAlolan) { formattedName.unshift(`Alolan`);}
+        if (validMega) { formattedName.unshift(`Mega`); item.hasXY ? formattedName.push(`${capitalize(xy)}`) : '';}
+        if (shiny)
+        {
+            formattedName.unshift(`✨`);
+            imageURL = `https://assets.poketwo.net/shiny/${artworkID}.png`;
+            thumbnailURL = `https://play.pokemonshowdown.com/sprites/ani-shiny/${artworkName}.gif`;
+        }
 
         const embed = new Discord.MessageEmbed()
             .setColor(species.color.name.toUpperCase())
@@ -261,7 +276,7 @@ export default class PokemonCommand implements IBotCommand
             .setDescription(`${textEntry}`)
             .setThumbnail(thumbnailURL)
             .addFields(embedFields)
-            .setImage(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${artworkID}.png`)
+            .setImage(imageURL)
             .setTimestamp()
             ;
         message.channel.send(embed);

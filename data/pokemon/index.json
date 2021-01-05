@@ -23,7 +23,8 @@
     {
       "name": "charizard",
       "url": "https://pokeapi.co/api/v2/pokemon/6/",
-      "hasMega": true
+      "hasMega": true,
+      "hasXY": true
     },
     {
       "name": "squirtle",
@@ -639,7 +640,8 @@
     {
       "name": "mewtwo",
       "url": "https://pokeapi.co/api/v2/pokemon/150/",
-      "hasMega": true
+      "hasMega": true,
+      "hasXY": true
     },
     {
       "name": "mew",
