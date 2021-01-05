@@ -14,7 +14,8 @@ export type pokeData = {
     galar?: boolean,
     alola?: boolean,
     hasMega?: boolean,
-    hasXY?: boolean
+    hasXY?: boolean,
+    forms?: string[]
 }
 
 export const Regions = {
