@@ -1,21 +1,24 @@
 // TODO
-// Shiny Pokemon: Thumbnail and Image
-// Pokemon Forms: Galar, Alolan, Special (e.g. Wormadam Forms, Rotom Forms, Giratina) Male and Female diff, MEGAS
-// Pictures for Galarian and alolan
+// Need to Try Every Form (Special and Regional) to look for edge cases
+// Pokemon who have default forms and a regional (specifically darmanitan so far) need to be accounted for
+// Pokemon Forms: Galar, Alolan, Special (e.g. Wormadam Forms, Rotom Forms, Giratina), MEGAS
+// Gigantamax (gmax)
+// Pictures for Galarian
+// Shiny Mega X does not work
+// Pikachu Special Forms (Forms with spaces join form name as one word)
+// unown pictures (unown is a special case, the forms dont seem to work)
+// Different form text entries
 // Evolution Chain / Method
 // Smogon Tier for latest gen?
 // Region introduced
 // Move Count
-// Using region, get their thumbnail (can use smogon for non-shiny sprites over gen 5, find another source for shiny)
+// Using region, get their thumbnail
 // Some pokemon with default formes like giratina and wormadam do not have a pokemon endpoint
 // Add More Information to Embed
-// More examples for edge cases
 // May want to have a function to parse the pokemon data so code is more maintainable
 // Clear Cache for pokedex every once in a while so ram isn't perma doomed
-// Different form text entries
-// unown pictures
 // Chance to show shiny on random
-// Pikachu Special Forms
+// Move some stuff into pokehelper.ts
 
 import {IBotCommand, IBot, Discord, pokedex, IBotCommandInfo, CategoryTypes, Argument} from '../api';
 
@@ -34,7 +37,7 @@ export default class PokemonCommand implements IBotCommand
     public readonly descriptions = [
         "Shows information on a random pokemon unless you specify a name or number.",
         "Can search from 1 to 898 (Pokedex Number).",
-        "For names with spaces, I haven't figured it out yet, but I will soon!",
+        "Shows data and images for shiny, mega and different forms of pokemon.",
     ];
 
     public readonly arguments: Argument[] =
@@ -51,6 +54,8 @@ export default class PokemonCommand implements IBotCommand
     private _info!: IBotCommandInfo;
 
     private _Pokedex: pokeData[] = [];
+
+    private _PokeWithForms: pokeData[] = [];
 
     private _defaultFormExceptions = ["mr-mime", "ho-oh", "mime-jr", "porygon-z", "type-null", "jangmo-o", "hakamo-o", "kommo-o", "tapu"];
 
@@ -72,12 +77,13 @@ export default class PokemonCommand implements IBotCommand
             cooldown: 3,
             args: this.arguments,
             permissions: null,
-            examples: ["25", "pikachu", ""],
+            examples: ["25", "pikachu", "shiny pikachu", "alolan raichu", "shiny alolan raichu", "mega charizard x", "landorus therian"],
         };
 
         console.time(`Data: ${this.name} data loaded in`);
         loadData(dataPath, this._Pokedex).then(data => {
             this._Pokedex = data;
+            this._PokeWithForms = data.filter(mon => {return mon.forms;});
             console.timeEnd(`Data: ${this.name} data loaded in`);
         }).catch(err => {
             console.error(`The data for ${this.name} could not be loaded. Ensure data folder is present in dist.`);
@@ -109,22 +115,41 @@ export default class PokemonCommand implements IBotCommand
             if (request.toString().includes(`y`))
             {
                 xy = `y`;
-                cleanRequest = cleanRequest.replace(/[-xy]/g, '');
+                cleanRequest = cleanRequest.replace(/[-y]/g, '');
             }
-            else
+            else if (request.toString().includes(`x`))
             {
                 xy = `x`;
-                cleanRequest = cleanRequest.replace(/[-xy]/g, '');
+                cleanRequest = cleanRequest.replace(/[-x]/g, '');
             }
         }
 
+
+        const formRequest = cleanRequest.split('-');
+        let form = false;
+
         // Check Request
-        // message.reply(`Clean Request: ${cleanRequest} | Request: ${request}`);
+        // message.reply(`Clean Request: ${cleanRequest} | Request: ${request} | Form Request: ${formRequest}`);
+
 
         if (typeof request === 'string')
         {
-            item = this._Pokedex.find(data => { return data.name === cleanRequest || (data.name.split('-')[0] === cleanRequest
-            && !this._defaultFormExceptions.includes(cleanRequest)); }) ?? item;
+
+            item = this._Pokedex.find(data => {
+                return data.name === cleanRequest || (data.name.split('-')[0] === cleanRequest
+                && !this._defaultFormExceptions.includes(cleanRequest));
+            }) ?? item;
+
+            if (!item.url)
+            {
+                item = this._PokeWithForms.find(data => {
+                    const cleanName = this._defaultFormExceptions.includes(data.name) ? data.name : data.name.split('-')[0];
+                    return cleanName === formRequest[0] && !!(data.forms?.find(form => {
+                        return `${cleanName}-${form}` === cleanRequest || (`${cleanName}-${form}` === cleanRequest);
+                    }));
+                }) ?? item;
+                form = true;
+            }
 
             const re = parseInt(cleanRequest) - 1;
             if (re >= 0 && re <= this.pokedexEnd - 1)
@@ -138,9 +163,9 @@ export default class PokemonCommand implements IBotCommand
         const validAlolan = alolan && !!(item.alola);
         const validGalarian = galarian && !!(item.galar);
         const validMega = mega && !!(item.hasMega);
+        const validForm = form && !!(item.forms);
         const url = typeof request === 'number' ? this._Pokedex[request - 1].url : item.url;
         const index = this._Pokedex.indexOf(item) + 1;
-        console.log(item);
 
         // Check if a form was requested and checks if that form exists
         if (alolan)
@@ -165,8 +190,9 @@ export default class PokemonCommand implements IBotCommand
         }
 
         // message.reply(`Clean Request After Form Checks: ${cleanRequest}`);
+        // if (validForm) { message.reply(`Form for ${item.name} is valid`);}
 
-        const pokemon = validAlolan || validGalarian || validMega  ?
+        const pokemon = validForm || validAlolan || validGalarian || validMega ?
             pokedex.getPokemonByName(cleanRequest) : pokedex.resource(url);
         // const pokemonSpecies = pokedex.getPokemonSpeciesByName(index || request);
 
@@ -178,7 +204,7 @@ export default class PokemonCommand implements IBotCommand
 
         // Get this down to a Promise.all(), always use id even if name is requested
         let artworkID, artworkName; // mon, species;
-        if (validAlolan || validMega || validGalarian)
+        if (validAlolan || validMega || validGalarian || validForm)
         {
             artworkID = mon.id;
             artworkName = mon.name;
@@ -257,7 +283,7 @@ export default class PokemonCommand implements IBotCommand
 
         let thumbnailURL = `https://www.smogon.com/dex/media/sprites/xy/${artworkName}.gif`;
         let imageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${artworkID}.png`;
-        const formattedName = species.name.replace(/[-]/g, ' ').split(' ');
+        const formattedName = validForm ? formRequest : species.name.replace(/[-]/g, ' ').split(' ');
         formattedName.forEach(n => { formattedName[formattedName.indexOf(n)] = capitalize(n); });
 
         if (validGalarian) { formattedName.unshift(`Galarian`);}
