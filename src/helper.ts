@@ -116,3 +116,9 @@ export function findAnagrams(input: string, count?: number) : string[]
 
     return count ? anagrams.slice(count, count) : anagrams;
 }
+
+export function groupByLetter(arr: string[], char: string): string[] {
+    return arr.sort().filter((str) => {
+        return str.charAt(0).toLowerCase() === char.toLowerCase();
+    });
+}

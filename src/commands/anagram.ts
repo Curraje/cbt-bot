@@ -1,8 +1,10 @@
-// Group Anagrams by the letter they start with
-// Comma-separated list instead of new lines to save space
 import {IBotCommand, Discord, IBotCommandInfo, CategoryTypes, Argument} from '../api';
 
-import {isAnagram, findAnagrams, permutation, repeatCharCount, factorial, capitalize} from '../helper';
+import {isAnagram, findAnagrams, repeatCharCount, capitalize, groupByLetter, factorial} from '../helper';
+
+import {paginationEmbed} from '../paginationEmbed';
+
+import uniq from 'lodash/uniq';
 
 export default class AnagramCommand implements IBotCommand
 {
@@ -11,17 +13,14 @@ export default class AnagramCommand implements IBotCommand
     public readonly name = "anagram";
 
     public readonly descriptions: string[] = [
-        "With one argument, returns the anagrams for that word, up to 120 anagrams (5 unique characters).",
+        "With one argument, returns the anagrams for that word, up to 40319 anagrams (8 unique characters).",
         "If there are too many anagrams, will display amount instead.",
         "With two arguments, determines whether they are anagrams.",
     ];
 
     aliases: string[] = [
         "ana",
-        "similar",
-        "rearrange",
-        "contains",
-        "has",
+        "anagrams",
     ];
 
     public readonly arguments: Argument[] = [
@@ -39,8 +38,7 @@ export default class AnagramCommand implements IBotCommand
 
     private _info!: IBotCommandInfo;
 
-    init(): boolean
-    {
+    init(): boolean {
 
         this._info = {
             name: this.name,
@@ -56,78 +54,79 @@ export default class AnagramCommand implements IBotCommand
         return true;
     }
 
-    public isValid(message: Discord.Message, args: string[]): boolean
-    {
+    public isValid(message: Discord.Message, args: string[]): boolean {
         return !!args.length;
     }
 
-    public async execute(message: Discord.Message, args: string[]): Promise<void>
-    {
-        if (args[0] && !args[1])
-        {
+    public async execute(message: Discord.Message, args: string[]): Promise<void> {
+        if (args[0] && !args[1]) {
             const s1 = args[0];
 
             const length = s1.length - repeatCharCount(s1);
+            const uniqChars = uniq(s1.split(''));
 
-            if (length > 19)
-            {
+            if (length > 19) {
                 message.reply(`${length} unique characters is way too big a number! I wouldn't give an accurate permutation anyway!`);
                 return;
             }
-
-            const permCount = permutation(length, length);
-
-            if (permCount > factorial(6))
-            {
-                // TODO: Output to file or something
-                message.reply(`Anagram possibility was too large! Found: ${permCount} permutations.`);
+            if (uniqChars.length === 1) {
+                message.reply(`\`${s1}\` contains only 1 unique character and therefore has no anagrams! It's a lonely word! 😔`);
+                return;
             }
-            else
-            {
-                const combinations = findAnagrams(s1);
 
-                if (combinations.length > 179)
-                {
-                    message.reply(`I can't send ${combinations.length} anagrams in one message! Sorry!`);
-                    return;
-                }
+            const permCount = factorial(length);
 
-                for (let index = 0; index < combinations.length; index++)
-                {
-                    const tmp = combinations[index].toLowerCase();
-                    combinations[index] = capitalize(tmp);
-                }
+            if (permCount > factorial(8)) {
+                message.reply(`Anagram possibility was too large! Found: ${permCount} permutations.`);
+                return;
+            }
 
-                combinations.push(`**Original Word:** _${s1}_`);
+            const combinations = findAnagrams(s1);
+            for (let index = 0; index < combinations.length; index++) {
+                const tmp = combinations[index].toLowerCase();
+                combinations[index] = capitalize(tmp);
+            }
+
+            const embeds: Discord.MessageEmbed[] = [];
+            const anagramCount = combinations.length;
+            const PAGE_LIMIT = 100;
+
+            while(combinations.length) {
+                const page = combinations.splice(0, PAGE_LIMIT);
 
                 const embed = new Discord.MessageEmbed()
-                    .setTitle(`Found ${combinations.length - 1} Anagrams for ${s1}`)
-                    .setDescription(combinations)
-                    ;
-                message.channel.send(embed);
+                    .setTitle(`Showing ${page.length} Anagrams out of ${anagramCount} for \`${s1}\``)
+                ;
+
+                // Group Words by Starting Letter
+                uniqChars.forEach(char => {
+                    const arr = groupByLetter(page, char);
+                    if (arr.length) {
+                        embed.addFields({name: `${arr.length} starting with \`${capitalize(char)}\``, value: arr.join(` ***|*** `)});
+                    }
+                });
+
+                embeds.push(embed);
             }
+
+            paginationEmbed(message, embeds);
         }
 
         // If Both arguments are passed
-        if (args[0] && args[1])
-        {
+        if (args[0] && args[1]) {
             const s1 = args[0];
             const s2 = args[1];
 
-            if (isAnagram(s1, s2))
-            {
+            if (isAnagram(s1, s2)) {
                 message.reply(`${s1} and ${s2} are anagrams.`);
             }
-            else if (s1.includes(s2))
-            {
+            else if (s1.includes(s2)) {
                 message.reply(`${s1} and ${s2} are not anagrams, but ${s1} contains ${s2}`);
             }
-            else if (s2.includes(s1))
-            {
+            else if (s2.includes(s1)) {
                 message.reply(`${s1} and ${s2} are not anagrams, but ${s2} contains ${s1}.`);
             }
-            else
-            {
+            else {
                 message.reply(`${s1} and ${s2} are neither anagrams nor does one contain the other.`);
             }
         }
