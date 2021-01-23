@@ -1,10 +1,11 @@
 // TODO
+// Fix Groudon and Kyogre `primal` edgecase so they work like normal megas
+// Shiny Mega X does not work
 // Need to Try Every Form (Special and Regional) to look for edge cases
 // Pokemon who have default forms and a regional (specifically darmanitan so far) need to be accounted for
 // Pokemon Forms: Galar, Alolan, Special (e.g. Wormadam Forms, Rotom Forms, Giratina), MEGAS
-// Gigantamax (gmax)
-// Pictures for Galarian
-// Shiny Mega X does not work
+// Gigantamax (gmax) forms (artwork and requests)
+// Artwork for Galarian and Shiny Galarian
 // Pikachu Special Forms (Forms with spaces join form name as one word)
 // unown pictures (unown is a special case, the forms dont seem to work)
 // Different form text entries
@@ -13,20 +14,19 @@
 // Region introduced
 // Move Count
 // Using region, get their thumbnail
-// Some pokemon with default formes like giratina and wormadam do not have a pokemon endpoint
 // Add More Information to Embed
 // May want to have a function to parse the pokemon data so code is more maintainable
 // Clear Cache for pokedex every once in a while so ram isn't perma doomed
 // Chance to show shiny on random
 // Move some stuff into pokehelper.ts
 
-import {IBotCommand, IBot, Discord, pokedex, IBotCommandInfo, CategoryTypes, Argument} from '../api';
+import {IBotCommand, IBot, Discord, IBotCommandInfo, CategoryTypes, Argument} from '../api';
 
 import {getRandomInt, capitalize, loadData} from '../helper';
 
 import { Pokemon } from 'pokedex-promise-v2';
 
-import {Regions, pokeData} from '../pokehelper';
+import {Regions, pokeData, pokedex} from '../pokehelper';
 
 export default class PokemonCommand implements IBotCommand
 {
@@ -283,7 +283,7 @@ export default class PokemonCommand implements IBotCommand
 
         let thumbnailURL = `https://www.smogon.com/dex/media/sprites/xy/${artworkName}.gif`;
         let imageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${artworkID}.png`;
-        const formattedName = validForm ? formRequest : species.name.replace(/[-]/g, ' ').split(' ');
+        const formattedName = validForm ? formRequest : species.name.split('-');
         formattedName.forEach(n => { formattedName[formattedName.indexOf(n)] = capitalize(n); });
 
         if (validGalarian) { formattedName.unshift(`Galarian`);}

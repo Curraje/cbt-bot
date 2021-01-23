@@ -1,3 +1,7 @@
+import Pokedex from 'pokedex-promise-v2';
+
+export const pokedex = new Pokedex({timeout: 5 * 1000});
+
 export type Region = {
     name: string,
     generation: [string, number],
