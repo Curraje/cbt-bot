@@ -1,6 +1,8 @@
+// LENGTH CHECK DOES NOT WORK FOR EVERY CASE
+// Make sure the message does not contain any emojis
 import {IBotCommand, Discord, IBotCommandInfo, CategoryTypes, Argument} from '../api';
 
-import {isAnagram, findAnagrams, repeatCharCount, capitalize, groupByLetter, factorial} from '../helper';
+import {isAnagram, findAnagrams, capitalize, groupByLetter, factorial, permutation, repeatCounts} from '../helper';
 
 import {paginationEmbed} from '../paginationEmbed';
 
@@ -62,11 +64,22 @@ export default class AnagramCommand implements IBotCommand
         if (args[0] && !args[1]) {
             const s1 = args[0];
 
-            const length = s1.length - repeatCharCount(s1);
+            // Check is not extensive. Does not account for amount of letters
+            // const length = s1.length - repeatCharCount(s1);
+            const length = s1.length;
+
             const uniqChars = uniq(s1.split(''));
 
-            if (length > 19) {
-                message.reply(`${length} unique characters is way too big a number! I wouldn't give an accurate permutation anyway!`);
+            // This is no longer cap but need a way to cap the requests or make the algorithm more efficient
+            const permCount = permutation(length, repeatCounts(s1.split('')));
+            // console.log(permCount);
+            // console.log(repeatCounts(s1.split('')));
+            // console.log(factorial(length)); console.log(factorial(12));
+            // if (permCount) { return;}
+
+            // Might have to change this check
+            if (uniqChars.length > 19) {
+                message.reply(`${length} characters is way too big a number! I wouldn't give an accurate permutation anyway!`);
                 return;
             }
             if (uniqChars.length === 1) {
@@ -74,14 +87,15 @@ export default class AnagramCommand implements IBotCommand
                 return;
             }
 
-            const permCount = factorial(length);
-
-            if (permCount > factorial(8)) {
-                message.reply(`Anagram possibility was too large! Found: ${permCount} permutations.`);
+            // Can we make this more concrete or what
+            if (factorial(length) >= factorial(8)) {
+                message.reply(`Anagram possibility was too large! Found: ${permCount} permutations and ${factorial(length)} combinations.`);
                 return;
             }
 
+            // TODO: Fix Inefficient because of includes check
             const combinations = findAnagrams(s1);
+
             for (let index = 0; index < combinations.length; index++) {
                 const tmp = combinations[index].toLowerCase();
                 combinations[index] = capitalize(tmp);
@@ -133,5 +147,4 @@ export default class AnagramCommand implements IBotCommand
 
         return;
     }
-
 }
