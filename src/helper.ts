@@ -1,3 +1,10 @@
+// Use this function to load data as a specific type
+export async function loadData<T>(dataPath: string, someType: T): Promise<T>
+{
+    const data = await import(`${dataPath}`);
+    return data.default as typeof someType;
+}
+
 // use lodash random instead
 export function getRandomInt(min?: number, max?: number): number
 {
@@ -48,10 +55,19 @@ export function factorial(num: number): number
     return rval;
 }
 
-export function permutation(n: number, k: number): number
+export function permutation(n: number, k: number|number[]): number
 {
     const p = factorial(n);
-    const v = factorial(n-k);
+
+    let v: number;
+    if (Array.isArray(k)) {
+        v = 1;
+        k.forEach(subset => {
+            v *= factorial(subset);
+        });
+    } else {
+        v = factorial(n-k);
+    }
     return p/v;
 }
 
@@ -62,11 +78,13 @@ export function swap<T>(pos: T[], i: number, j: number): void
     pos[j] = tmp;
 }
 
+// Kinda Useless
 export function isIsogram(str: string): boolean
 {
     return !/(.).*\1/.test(str);
 }
 
+// Kinda useless
 export function repeatCharCount(str: string): number
 {
     const count = str.toLowerCase().split('').sort().join('').match(/(.)\1+/g)?.length;
@@ -98,7 +116,7 @@ export function findAnagrams(input: string, count?: number) : string[]
             const word = chars.join('');
             if (!anagrams.includes(word) && word != input)
             {
-                anagrams.push(chars.join(''));
+                anagrams.push(word);
             }
         }
         else {
@@ -108,4 +126,30 @@ export function findAnagrams(input: string, count?: number) : string[]
     }
 
     return count ? anagrams.slice(count, count) : anagrams;
+}
+
+export function groupByLetter(arr: string[], char: string): string[] {
+    return arr.sort().filter((str) => {
+        return str.charAt(0).toLowerCase() === char.toLowerCase();
+    });
+}
+
+export function repeatCounts<T>(arr: T[]): number[] {
+
+    arr = arr.sort();
+    let prev = arr[0];
+    let count = 1;
+    const out: number[] = [];
+
+    for (let i = 1; i <= arr.length; i++) {
+        if (arr[i] === prev) {
+            count++;
+        }
+        else {
+            out.push(count);
+            prev = arr[i];
+            count = 1;
+        }
+    }
+    return out;
 }
